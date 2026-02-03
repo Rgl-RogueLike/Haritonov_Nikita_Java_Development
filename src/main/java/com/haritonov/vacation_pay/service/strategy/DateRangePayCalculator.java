@@ -1,6 +1,12 @@
 package com.haritonov.vacation_pay.service.strategy;
 
-import com.haritonov.vacation_pay.service.VacationPayService;
+import com.haritonov.vacation_pay.dto.VacationPayRequest;
 
-public class DateRangePayCalculator implements VacationPayService {
+import java.math.BigDecimal;
+
+public class DateRangePayCalculator implements VacationPayStrategy {
+    @Override
+    public BigDecimal calculate(VacationPayRequest request) {
+        return null;
+    }
 }
