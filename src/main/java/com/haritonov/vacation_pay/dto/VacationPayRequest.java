@@ -33,19 +33,19 @@ public class VacationPayRequest {
         this.vacationDays = vacationDays;
     }
 
-    public LocalDate getStart() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStart(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEnd() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEnd(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }
