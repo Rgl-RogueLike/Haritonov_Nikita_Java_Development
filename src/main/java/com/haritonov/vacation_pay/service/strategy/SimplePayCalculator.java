@@ -2,10 +2,12 @@ package com.haritonov.vacation_pay.service.strategy;
 
 import com.haritonov.vacation_pay.dto.VacationPayRequest;
 import com.haritonov.vacation_pay.util.CalculationConstants;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Component
 public class SimplePayCalculator implements VacationPayStrategy {
     @Override
     public BigDecimal calculate(VacationPayRequest request) {
