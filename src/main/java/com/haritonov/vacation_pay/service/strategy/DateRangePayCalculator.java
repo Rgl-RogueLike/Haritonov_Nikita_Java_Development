@@ -26,6 +26,9 @@ public class DateRangePayCalculator implements VacationPayStrategy {
         if (startDate == null || endDate == null) {
             throw new IllegalArgumentException("Необходимы даты начала и конца отпуска");
         }
+        if (endDate.isBefore(startDate)) {
+            throw new IllegalArgumentException("Дата конца отпуска не может быть раньше даты начала");
+        }
         long totalDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
         int paidDays = 0;
         for (int i = 0; i < totalDays; i++) {
