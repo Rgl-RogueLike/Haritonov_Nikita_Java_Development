@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception exception) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ErrorResponse("Внутрення ошибка сервера: " + exception.getMessage()));
+                .body(new ErrorResponse("Внутренняя ошибка сервера: " + exception.getMessage()));
     }
 
 }

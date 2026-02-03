@@ -12,11 +12,11 @@ public class VacationPayResponse {
         this.calculationResult = calculationResult;
     }
 
-    public BigDecimal getCalculactionResult() {
+    public BigDecimal getCalculationResult() {
         return calculationResult;
     }
 
-    public void setCalculactionResult(BigDecimal calculationResult) {
+    public void setCalculationResult(BigDecimal calculationResult) {
         this.calculationResult = calculationResult;
     }
 }
