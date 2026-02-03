@@ -11,11 +11,11 @@ import java.math.RoundingMode;
 public class SimplePayCalculator implements VacationPayStrategy {
     @Override
     public BigDecimal calculate(VacationPayRequest request) {
-        BigDecimal averageSalary = request.getAverageSalary();
-        Integer vacationDays = request.getVacationDays();
-        if (vacationDays == null) {
+        if (request.getVacationDays() == null) {
             throw new IllegalArgumentException("Количество дней отпуска не указано для расчета");
         }
+        BigDecimal averageSalary = request.getAverageSalary();
+        Integer vacationDays = request.getVacationDays();
         BigDecimal averageDailySalary = averageSalary.divide(CalculationConstants.AVG_DAYS_IN_MONTH, 2, RoundingMode.HALF_UP);
         return averageDailySalary.multiply(BigDecimal.valueOf(vacationDays));
     }
