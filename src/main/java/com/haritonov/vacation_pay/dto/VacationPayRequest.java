@@ -25,6 +25,7 @@ public class VacationPayRequest {
      * Количество дней отпуска.
      * Используется для простого расчета (без учета праздничных дней).
      */
+    @Positive(message = "Количество дней должно быть больше нуля")
     private Integer vacationDays;
 
     /**
