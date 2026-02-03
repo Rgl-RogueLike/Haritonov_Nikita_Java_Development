@@ -12,8 +12,8 @@ public class VacationPayRequest {
     private BigDecimal averageSalary;
 
     private Integer vacationDays;
-    private LocalDate start;
-    private LocalDate end;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public VacationPayRequest() {}
 
@@ -25,27 +25,27 @@ public class VacationPayRequest {
         this.averageSalary = averageSalary;
     }
 
-    public int getVacationDays() {
+    public Integer getVacationDays() {
         return vacationDays;
     }
 
-    public void setVacationDays(int vacationDays) {
+    public void setVacationDays(Integer vacationDays) {
         this.vacationDays = vacationDays;
     }
 
     public LocalDate getStart() {
-        return start;
+        return startDate;
     }
 
-    public void setStart(LocalDate start) {
-        this.start = start;
+    public void setStart(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public LocalDate getEnd() {
-        return end;
+        return endDate;
     }
 
-    public void setEnd(LocalDate end) {
-        this.end = end;
+    public void setEnd(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }
