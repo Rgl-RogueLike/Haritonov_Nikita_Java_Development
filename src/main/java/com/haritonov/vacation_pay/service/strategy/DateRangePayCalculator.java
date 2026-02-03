@@ -10,15 +10,33 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Стратегия расчета отпускных по датам (с учетом праздничных дней).
+ * Реализует интерфейс {@link VacationPayStrategy}.
+ */
 @Component
 public class DateRangePayCalculator implements VacationPayStrategy {
 
+    /**
+     * Объект настроек, содержащий список официальных праздничных дней в 2026 году.
+     */
     private final HolidaysProperties holidaysProperties;
 
+    /**
+     * Конструктор для внедрения зависимости (Dependency Injection).
+     * @param holidaysProperties бин с настройками праздников
+     */
     public DateRangePayCalculator(HolidaysProperties holidaysProperties) {
         this.holidaysProperties = holidaysProperties;
     }
 
+    /**
+     * Выполняет расчет суммы отпускных за указанный период.
+     *
+     * @param "request" запрос, содержащий даты начала и конца отпуска, а также среднюю зарплату
+     * @return рассчитанная сумма отпускных. Может вернуть {@link BigDecimal#ZERO}, если весь период состоит из праздников
+     * @throws IllegalArgumentException если даты не указаны или дата конца раньше даты начала
+     */
     @Override
     public BigDecimal calculate(VacationPayRequest request) {
         LocalDate startDate = request.getStartDate();

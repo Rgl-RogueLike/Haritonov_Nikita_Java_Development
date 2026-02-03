@@ -11,13 +11,30 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для чтения настроек праздничных дней из конфигурации (application.yml).
+ * Связан с префиксом {@code holidays} в YAML-файле через {@link ConfigurationProperties}.
+ * При инициализации преобразует строки дат в объекты {@link LocalDate} для быстрого поиска.
+ */
 @Component
 @ConfigurationProperties(prefix = "holidays")
 public class HolidaysProperties {
 
+    /**
+     * Список строковых дат, считанных из YAML (например, "2024-01-01").
+     */
     private List<String> dates;
+
+    /**
+     * Кэш (Set) распарсенных объектов {@link LocalDate}.
+     */
     private Set<LocalDate> parsedDates;
 
+    /**
+     * Метод, запускаемый после создания бина.
+     * Преобразует поток строк {@link #dates} в {@link Set<LocalDate>}.
+     * Отсеивает некорректные даты, выводя ошибку в System.err.
+     */
     @PostConstruct
     public void init() {
         if (dates != null) {
