@@ -1,6 +1,5 @@
 package com.haritonov.vacation_pay.dto;
 
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
@@ -25,6 +24,7 @@ public class VacationPayRequest {
      * Количество дней отпуска.
      * Используется для простого расчета (без учета праздничных дней).
      */
+    @NotNull(message = "Количество дней не может быть пустым")
     @Positive(message = "Количество дней должно быть больше нуля")
     private Integer vacationDays;
 
@@ -32,13 +32,7 @@ public class VacationPayRequest {
      * Дата начала отпуска.
      * Используется для расчета с учетом праздничных дней.
      */
-    private LocalDate startDate;
-
-    /**
-     * Дата окончания отпуска.
-     * Используется для расчета с учетом праздничных дней.
-     */
-    private LocalDate endDate;
+    private LocalDate vacationDate;
 
     /**
      * Конструктор по умолчанию.
@@ -61,31 +55,11 @@ public class VacationPayRequest {
         this.vacationDays = vacationDays;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getVacationDate() {
+        return vacationDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
-     * Метод валидации.
-     * Проверяет, что указано ЛИБО количество дней, ЛИБО диапазон дат, но не оба сразу и не пустоту.
-     * @return true, если условия выполнены, иначе false.
-     */
-    @AssertTrue(message = "Либо укажите количество дней отпуска, либо дату начала и конца")
-    public boolean isDatesOrDaysProvided() {
-        boolean hasDays = vacationDays != null;
-        boolean hasDates = startDate != null && endDate != null;
-        return hasDays != hasDates;
+    public void setVacationDate(LocalDate vacationDate) {
+        this.vacationDate = vacationDate;
     }
 }
