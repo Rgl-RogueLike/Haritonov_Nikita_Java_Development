@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,12 +36,25 @@ public class GlobalExceptionHandler {
      * @return ResponseEntity с картой ошибок (поле -> сообщение) и статусом 400 Bad Request
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException exception) {
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(BindException exception) {
         Map<String, String> errors = new HashMap<>();
-        BindException bindException = (BindException) exception;
-        bindException.getBindingResult().getAllErrors().forEach((error) -> {
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
+            FieldError fieldError = (FieldError) error;
+            String[] codes = fieldError.getCodes();
+            if (codes != null && Arrays.stream(codes).anyMatch(code -> code.startsWith("typeMismatch"))) {
+
+                if (Arrays.stream(codes).anyMatch(code -> code.contains("LocalDate"))) {
+                    errorMessage = "Неверный формат даты (требуется dd-MM-yyyy)";
+                }
+                else if (Arrays.stream(codes).anyMatch(code -> code.contains("Integer"))) {
+                    errorMessage = "Значение должно быть числом";
+                }
+                else {
+                    errorMessage = "Неверный формат данных";
+                }
+            }
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
