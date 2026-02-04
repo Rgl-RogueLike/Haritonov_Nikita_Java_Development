@@ -50,7 +50,7 @@ public class VacationPayServiceImpl implements VacationPayService {
     @Override
     public VacationPayResponse calculate(VacationPayRequest request) {
         VacationPayStrategy strategy;
-        if (request.getStartDate() != null && request.getEndDate() != null) {
+        if (request.getVacationDate() != null) {
             strategy = dateRangePayCalculator;
         } else {
             strategy = simplePayCalculator;
